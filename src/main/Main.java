@@ -1,11 +1,11 @@
 package main;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import algorithm.FCFSAlgorithm;
+import model.Process;
+import structure.QueueImplementation;
 
 public class Main {
     final static Scanner SCANNER = new Scanner(System.in);
@@ -18,8 +18,7 @@ public class Main {
             JOptionPane.INFORMATION_MESSAGE
         );
 
-        // TEMPORARY QUEUE VARIABLE
-        Queue<FCFSAlgorithm.Process> queue = new LinkedList<>();
+        QueueImplementation<Process> queue = new QueueImplementation<>();
 
         System.out.print("Enter the number of processes - ");
         int n = SCANNER.nextInt();
@@ -30,7 +29,7 @@ public class Main {
             System.out.print("Enter burst time for process " + i + " - ");
             int burstTime = SCANNER.nextInt();
 
-            queue.add(new FCFSAlgorithm.Process(String.valueOf(i), arrivalTime, burstTime)); // change this to enqueue
+            queue.enqueue(new Process(String.valueOf(i), arrivalTime, burstTime));
         }
 
         SCANNER.close();

@@ -1,33 +1,21 @@
 package algorithm;
 
-import java.util.Queue;
+import model.Process;
+import structure.QueueImplementation;
 
 public class FCFSAlgorithm {
 
-    // TEMPORARY PROCESS CLASS
-    public static class Process {
-        String processID;
-        int arrivalTime;
-        int burstTime;
-
-        Process(String processID, int arrivalTime, int burstTime) {
-            this.processID = processID;
-            this.arrivalTime = arrivalTime;
-            this.burstTime = burstTime;
-        }
-    }
-
     // Holds the output of the simulation so Main can display it
-    static class Results {
-        String resultsText;
-        double averageWaitingTime;
-        double averageTurnaroundTime;
+    public static class Results {
+        public String resultsText;
+        public double averageWaitingTime;
+        public double averageTurnaroundTime;
     }
 
     // FCFS algo
     // timeframe of k step, some process_i may arrive before/after process_i-1 burst finishes,
     // process_i has to yield before it can start it's burst time on k steps
-    public static Results run(Queue<Process> queue, int n) {
+    public static Results run(QueueImplementation<Process> queue, int n) {
         int currentTime = 0;
         double totalWaiting = 0;
         double totalTurnaround = 0;
@@ -35,17 +23,22 @@ public class FCFSAlgorithm {
         int turnaroundTime = 0;
         String results = "";
 
-        for (Process p : queue) {
-            if (currentTime < p.arrivalTime) {
-                currentTime = p.arrivalTime;
+        while (!queue.isEmpty()) {
+            Process p = queue.dequeue();
+
+            if (currentTime < p.getArrivalTime()) {
+                currentTime = p.getArrivalTime();
             }
-            waitingTime = currentTime - p.arrivalTime;
-            turnaroundTime = waitingTime + p.burstTime;
-            currentTime += p.burstTime;
+            waitingTime = currentTime - p.getArrivalTime();
+            turnaroundTime = waitingTime + p.getBurstTime();
+            currentTime += p.getBurstTime();
             totalWaiting += waitingTime;
             totalTurnaround += turnaroundTime;
 
-            results += "Process P" + p.processID + " <...> Arrival Time = " + p.arrivalTime + " <...> Waiting Time = " + waitingTime + " <...> Turnaround Time = " + turnaroundTime + "\n";
+            p.setWaitingTime(waitingTime);
+            p.setTurnaroundTime(turnaroundTime);
+
+            results += "Process P" + p.getProcessId() + " <...> Arrival Time = " + p.getArrivalTime() + " <...> Waiting Time = " + waitingTime + " <...> Turnaround Time = " + turnaroundTime + "\n";
         }
 
         Results output = new Results();

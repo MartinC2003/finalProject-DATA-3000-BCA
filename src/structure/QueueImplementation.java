@@ -1,20 +1,35 @@
 package structure;
 
-import exceptions.EmptyStackException;
-
 public class QueueImplementation<T> implements QueueInterface<T> {
 	Node<T> front;
     Node<T> rear;
     int length = 0;
-	
+
 	@Override
 	public void enqueue(T newEntry) {
-		
+		Node<T> newNode = new Node<>(newEntry);
+		if (isEmpty()) {
+			front = newNode;
+			rear = newNode;
+		} else {
+			rear.next = newNode;
+			rear = newNode;
+		}
+		length++;
 	}
 
 	@Override
 	public T dequeue() {
-		
+		if (isEmpty()) {
+			throw new IllegalStateException("Queue is empty.");
+		}
+		T data = front.data;
+		front = front.next;
+		if (front == null) {
+			rear = null;
+		}
+		length--;
+		return data;
 	}
 
 	@Override
