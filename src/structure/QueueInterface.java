@@ -1,3 +1,5 @@
+package structure;
+
 /**
  * Represents a generic queue interface.
  *

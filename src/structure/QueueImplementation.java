@@ -1,6 +1,6 @@
-package DataFinalProject;
+package structure;
 
-import java.util.EmptyStackException;
+import exceptions.EmptyStackException;
 
 public class QueueImplementation<T> implements QueueInterface<T> {
 	Node<T> front;
