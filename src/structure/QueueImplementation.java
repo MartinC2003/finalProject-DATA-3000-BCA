@@ -1,5 +1,7 @@
 package structure;
 
+import exceptions.EmptyStackException;
+
 public class QueueImplementation<T> implements QueueInterface<T> {
 	Node<T> front;
     Node<T> rear;
@@ -21,7 +23,7 @@ public class QueueImplementation<T> implements QueueInterface<T> {
 	@Override
 	public T dequeue() {
 		if (isEmpty()) {
-			throw new IllegalStateException("Queue is empty.");
+			throw new EmptyStackException("Queue is empty.");
 		}
 		T data = front.data;
 		front = front.next;
@@ -38,7 +40,7 @@ public class QueueImplementation<T> implements QueueInterface<T> {
 		if (front != null)
             return front.data;
 		else {
-			throw new IllegalStateException("Queue is empty.");
+			throw new EmptyStackException("Queue is empty.");
 		}
 	}
 

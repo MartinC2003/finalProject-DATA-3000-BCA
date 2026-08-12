@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import algorithm.FCFSAlgorithm;
@@ -49,3 +50,17 @@ public class Main {
         );
     }
 }
+
+/*
+Run these from the project root (the folder containing "src", not inside it):
+
+Compile:
+    javac -d out -sourcepath src src/main/Main.java
+
+Run:
+    java -cp out main.Main
+    if error occurs, try:
+    "C:\Program Files\Eclipse Adoptium\jdk-25.0.2.10-hotspot\bin\java.exe" -cp out main.Main
+
+*/
+
